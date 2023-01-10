@@ -1,13 +1,13 @@
-# AutoUpdate 简介
+### AutoUpdate 简介
 AutoUpdate是基于QT的通用桌面程序自动升级更新解决方案。
 
-# QT版本
+### QT版本
 5.15.X
 
-# 开发工具
+### 开发工具
  Qt Creator
  
-# 后端接口配置格式
+### 后端接口配置格式
 后端接口配置为json格式文件，这里保存的文件名为auto_upgrade.json，可自定义。
 
 ```json
@@ -56,7 +56,7 @@ dist
 └── libmysql.dll
 ```
 
-# 本程序相关配置
+### 本程序相关配置
 * 版本号文件为version.dat二进制文件，只记录数字版本号，写入版本号示例代码（写入版本号100）：
 
 ```c++
@@ -74,12 +74,13 @@ dist
 ```ini
 
 [upgrade]
-url=http://192.168.1.5/autoupdate/autoUpgrader.json
+url=http://192.168.1.1/autoupdate/auto_update.json
 
 ```
  
-# 发布
-## Windows环境打包
+### 发布
+##### Windows环境打包
+
 1. 用Release模式运行一遍;
 2. 在Build directory目录下的dist目录中会生成autoUpgrader.exe可执行文件；
 3. 打开QT命令行(开始菜单里面/QT下)，进入dist目录；
