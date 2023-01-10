@@ -12,7 +12,7 @@ AutoUpdate是基于QT的通用桌面程序自动升级更新解决方案。
 
 ```json
 {
-    "version": 100,
+    "version": 10010,
     "versionStr": "1.0.0",
     "type": 1,
     "zipurl": "http://192.168.1.1/autoupdate/main.zip",
@@ -57,15 +57,15 @@ dist
 ```
 
 ### 本程序相关配置
-* 版本号文件为version.dat二进制文件，只记录数字版本号，写入版本号示例代码（写入版本号100）：
+* 版本号文件为version.dat二进制文件，只记录数字版本号，写入版本号示例代码（写入版本号10010）：
 
 ```c++
-    QString configFilePath = QDir::currentPath()+"/version.dat";
+    QString configFilePath = QDir::currentPath()+"/update/version.dat";
     configFilePath = QDir::toNativeSeparators(configFilePath);
     QFile writeFile(configFilePath);
     writeFile.open(QIODevice::WriteOnly);
     QDataStream out(&writeFile);
-    out << 100;
+    out << 10010;
     writeFile.close();
 ```
 
