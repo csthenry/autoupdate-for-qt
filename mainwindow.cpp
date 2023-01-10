@@ -151,7 +151,7 @@ void MainWindow::upgradeBtnReset(int status){
  */
 void MainWindow::syncVersion()
 {
-    QString configFilePath = QDir::currentPath()+"/version.dat";
+    QString configFilePath = QDir::currentPath()+"/update/version.dat";
     configFilePath = QDir::toNativeSeparators(configFilePath);
     QFile writeFile(configFilePath);
     writeFile.open(QIODevice::WriteOnly);
@@ -179,6 +179,7 @@ void MainWindow::startMainApp(){
  * @brief BrowserWindow::closeEvent
  * @param event
  */
+/*
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     if(GlobalVal::status==2 || GlobalVal::status==0){
@@ -198,4 +199,5 @@ void MainWindow::closeEvent(QCloseEvent *event)
     event->accept();
     deleteLater();
 }
+*/
 

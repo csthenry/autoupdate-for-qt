@@ -34,7 +34,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
    void appendProgressMsg(QString msg);
-   void closeEvent(QCloseEvent *event) override;
+   //void closeEvent(QCloseEvent *event) override;
 
 private slots:
     void on_chkUpgradeBtn_clicked();
