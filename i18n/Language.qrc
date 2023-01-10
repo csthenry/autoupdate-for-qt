@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>autoUpdater_zh_CN.qm</file>
+        <file>autoUpdater_en_US.qm</file>
+    </qresource>
+</RCC>
