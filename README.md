@@ -60,7 +60,7 @@ dist
 * 版本号文件为version.dat二进制文件，只记录数字版本号，写入版本号示例代码（写入版本号100）：
 
 ```c++
-	QString configFilePath = QDir::currentPath()+"/version.dat";
+    QString configFilePath = QDir::currentPath()+"/version.dat";
     configFilePath = QDir::toNativeSeparators(configFilePath);
     QFile writeFile(configFilePath);
     writeFile.open(QIODevice::WriteOnly);
