@@ -53,7 +53,7 @@
        <bool>false</bool>
       </property>
       <property name="text">
-       <string>立即更新</string>
+       <string>开始更新</string>
       </property>
      </widget>
     </item>

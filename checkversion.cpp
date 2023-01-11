@@ -48,7 +48,7 @@ void CheckVersion::requestRemoteVersionFinished(QNetworkReply *reply){
     emit upgradeBtnStatus(1);
     GlobalVal::newVersion = newVer;
     QString newVerStr = jsonObj.value("versionStr").toString();
-    emit sendMsg(tr("发现新版本：%1，点击【立即更新】后开始更新").arg(newVerStr));
+    emit sendMsg(tr("发现新版本：%1，是否开始更新？").arg(newVerStr));
     int updateTtype = jsonObj.value("type").toInt();
     GlobalVal::updateTtype = updateTtype;
     QString zipurl = jsonObj.value("zipurl").toString();

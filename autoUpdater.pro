@@ -61,7 +61,7 @@ VERSION = 1.0.1
 QMAKE_TARGET_PRODUCT = "Automatic upgrade helper"
 
 #文件说明
-QMAKE_TARGET_DESCRIPTION = "QT client program automatic upgrade tool"
+QMAKE_TARGET_DESCRIPTION = "QT Client Program Automatic Upgrade Tool"
 
 #版权信息
 QMAKE_TARGET_COPYRIGHT = "Copyright (c) 2023 henry bytecho.net"
