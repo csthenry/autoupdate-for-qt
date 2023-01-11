@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     if(upgradeRemoteUrl.isEmpty()){
         this->upgradeBtnReset(2);
         this->appendProgressMsg(tr("获取配置信息出错，请检查应用程序是否正确...[错误代码:403]"));
-        this->appendProgressMsg(tr("程序将在%1秒后退出。").arg(5));
+        this->appendProgressMsg(tr("程序将在%1秒后退出...").arg(5));
         QTimer::singleShot(5000,qApp,SLOT(quit()));
         return;
     }
@@ -61,7 +61,7 @@ void MainWindow::on_nowUpgradeBtn_clicked()
      this->upgradeBtnReset(2);
      int updateTtype = GlobalVal::updateTtype;
      QString programRootDir = GlobalVal::programRootDir;
-    bool updateOK = false;
+     bool updateOK = false;
      if(updateTtype==1){
          QJsonArray fileList = GlobalVal::fileList;
          for(int i =0;i<fileList.size();i++){

@@ -2,6 +2,7 @@
 #define CHECKVERSION_H
 
 #include <QObject>
+#include <QProcess>
 #include <QNetworkRequest>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>

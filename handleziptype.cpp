@@ -188,7 +188,7 @@ void HandleZipType::networkReplyProgress(qint64 bytesRead, qint64 totalBytes)
     QString thisProgres = readstr + "/" + totalstr;
     emit sendMsg(tr("文件[%1]下载进度：%2").arg(this->originFileName,thisProgres));
     if(bytesRead==totalBytes){
-       emit sendMsg(tr("文件[%1]下载完成。").arg(this->originFileName));
+       emit sendMsg(tr("文件[%1]下载完成").arg(this->originFileName));
     }
 }
 /**
@@ -242,6 +242,7 @@ bool HandleZipType::cpdir(QString fromDirPath,QString toDirPath,bool f){
                 toDirPathDel.removeRecursively();
             }
             if(!cpdir(fileInfo.filePath(),toDirPath,true)){
+                emit sendMsg(tr("复制目录：%1时出现错误，目录可能正在占用").arg(toDirPath));
                 return false;
             }
         }else{
@@ -250,6 +251,7 @@ bool HandleZipType::cpdir(QString fromDirPath,QString toDirPath,bool f){
                 toDir.remove(fileInfo.fileName());
             }
             if(!QFile::copy(fileInfo.filePath(),toDir.filePath(fileInfo.fileName()))){
+                emit sendMsg(tr("复制文件：%1时出现错误，文件可能正在占用").arg(fileInfo.fileName()));
                 return false;
             }
             emit sendMsg(tr("复制文件：%1").arg(fileInfo.fileName()));

@@ -21,7 +21,7 @@ Download::~Download()
 void Download::downloadFile(QUrl newUrl,QString downloadDirectory)
 {
     if (!newUrl.isValid()) {
-        emit sendMsg(tr("下载地址[%1]校验失败。").arg(newUrl.toString()));
+        emit sendMsg(tr("下载地址[%1]校验失败").arg(newUrl.toString()));
         return;
     }
 
@@ -43,7 +43,16 @@ void Download::downloadFile(QUrl newUrl,QString downloadDirectory)
     }
     file = openFileForWrite(fileName);
     if (!file)
-        return;
+    {
+        QProcess::execute(tr("taskkill /im %1 /f").arg(fileName));
+        emit sendMsg(tr("正在等待：%1 进程中止...").arg(fileName));
+        if (QFile::exists(fileName)) {
+            QFile::remove(fileName);
+        }
+        file = openFileForWrite(fileName);
+        if(!file)
+            emit sendMsg(tr("更新文件：%1 失败，请检查文件是否占用").arg(fileName));
+    }
     // schedule the request
     startRequest(newUrl);
 }
@@ -155,7 +164,7 @@ void Download::networkReplyProgress(qint64 bytesRead, qint64 totalBytes)
     QString thisProgres = readstr + "/" + totalstr;
     emit sendMsg(tr("文件[%1]下载进度：%2").arg(this->originFileName,thisProgres));
     if(bytesRead==totalBytes){
-       emit sendMsg(tr("文件[%1]下载完成。").arg(this->originFileName));
+       emit sendMsg(tr("文件[%1]下载完成").arg(this->originFileName));
     }
 }
 

@@ -36,6 +36,12 @@
     </item>
     <item row="1" column="0">
      <widget class="QPushButton" name="chkUpgradeBtn">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>35</height>
+       </size>
+      </property>
       <property name="text">
        <string>检测更新</string>
       </property>
@@ -46,6 +52,12 @@
       <property name="enabled">
        <bool>false</bool>
       </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>35</height>
+       </size>
+      </property>
       <property name="cursor">
        <cursorShape>ArrowCursor</cursorShape>
       </property>
@@ -54,6 +66,10 @@
       </property>
       <property name="text">
        <string>开始更新</string>
+      </property>
+      <property name="icon">
+       <iconset resource="autoUpdater.qrc">
+        <normaloff>:/updaterIco</normaloff>:/updaterIco</iconset>
       </property>
      </widget>
     </item>

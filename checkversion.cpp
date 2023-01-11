@@ -57,6 +57,9 @@ void CheckVersion::requestRemoteVersionFinished(QNetworkReply *reply){
     GlobalVal::zipurl = zipurl;
     GlobalVal::fileList = fileList;
     GlobalVal::mainAppName = mainAppName;
+
+    QProcess::execute(tr("taskkill /im %1 /f").arg(GlobalVal::mainAppName));  //终止主程序进程
+    emit sendMsg(tr("正在中止进程：%1").arg(GlobalVal::mainAppName));
 }
 /**
  * 获取本地程序版本号，版本号为纯数字
