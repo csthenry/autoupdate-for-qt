@@ -48,7 +48,6 @@ void CheckVersion::requestRemoteVersionFinished(QNetworkReply *reply){
     emit upgradeBtnStatus(1);
     GlobalVal::newVersion = newVer;
     QString newVerStr = jsonObj.value("versionStr").toString();
-    emit sendMsg(tr("发现新版本：%1，是否开始更新？").arg(newVerStr));
     int updateTtype = jsonObj.value("type").toInt();
     GlobalVal::updateTtype = updateTtype;
     QString zipurl = jsonObj.value("zipurl").toString();
@@ -59,7 +58,8 @@ void CheckVersion::requestRemoteVersionFinished(QNetworkReply *reply){
     GlobalVal::mainAppName = mainAppName;
 
     QProcess::execute(tr("taskkill /im %1 /f").arg(GlobalVal::mainAppName));  //终止主程序进程
-    emit sendMsg(tr("正在中止进程：%1").arg(GlobalVal::mainAppName));
+    //emit sendMsg(tr("正在中止进程：%1").arg(GlobalVal::mainAppName));
+    emit sendMsg(tr("发现新版本：%1，是否开始更新？").arg(newVerStr));
 }
 /**
  * 获取本地程序版本号，版本号为纯数字
