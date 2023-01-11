@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     QSettings *settings;
-    settings = new QSettings("update/setting.ini",QSettings::IniFormat);
+    settings = new QSettings("setting.ini",QSettings::IniFormat);
     QString upgradeRemoteUrl = settings->value("upgrade/url").toString();
     ui->chkUpgradeBtn->setVisible(false);   //隐藏不必要的检测更新btn
     if(upgradeRemoteUrl.isEmpty()){
@@ -36,7 +36,10 @@ MainWindow::MainWindow(QWidget *parent)
     #else
         GlobalVal::programRootDir = QDir::currentPath();
     #endif*/
-    GlobalVal::programRootDir = QDir::currentPath();
+
+    QDir programRootDir = QDir::currentPath();
+    programRootDir.cdUp(); //更新程序根目录的上级目录
+    GlobalVal::programRootDir = programRootDir.path();    //此处定义主程序根目录
     this->on_chkUpgradeBtn_clicked();
 }
 
@@ -75,7 +78,7 @@ void MainWindow::on_nowUpgradeBtn_clicked()
                  QUrl url(fileUrl);
                  download->resetStatus();
                  download->downloadFile(url,downloadRootDir);
-                 this->syncVersion();
+                 //this->syncVersion(); 由主程序更新版本文件
                  this->appendProgressMsg(tr("更新完成^_^"));
                  updateOK = true;
              }
@@ -85,7 +88,7 @@ void MainWindow::on_nowUpgradeBtn_clicked()
          if(!zipurl.isEmpty()){
             QUrl url(zipurl);
             handleZip->downloadZip(url);
-            this->syncVersion();
+            //this->syncVersion(); 由主程序更新版本文件
             this->appendProgressMsg(tr("更新完成^_^"));
             updateOK = true;
          }
@@ -153,7 +156,7 @@ void MainWindow::upgradeBtnReset(int status){
  */
 void MainWindow::syncVersion()
 {
-    QString configFilePath = QDir::currentPath()+"/update/version.dat";
+    QString configFilePath = QDir::currentPath()+"/version.dat";
     configFilePath = QDir::toNativeSeparators(configFilePath);
     QFile writeFile(configFilePath);
     writeFile.open(QIODevice::WriteOnly);
@@ -169,7 +172,7 @@ void MainWindow::startMainApp(){
     QString mainAppName = GlobalVal::mainAppName;
     qApp->quit();
     if(!mainAppName.isEmpty()){
-        QProcess::startDetached(mainAppName,QStringList());
+        QProcess::startDetached(GlobalVal::programRootDir+"/"+mainAppName,QStringList(),GlobalVal::programRootDir);
     }
 }
 
