@@ -54,6 +54,9 @@ RESOURCES += \
 
 DESTDIR = ./dist
 
+# 申请管理员权限 此时需要使用管理员权限启动Qt Creator
+QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
+
 #版本信息
 VERSION = 1.0.1
 

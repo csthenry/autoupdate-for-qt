@@ -44,14 +44,8 @@ void Download::downloadFile(QUrl newUrl,QString downloadDirectory)
     file = openFileForWrite(fileName);
     if (!file)
     {
-        QProcess::execute(tr("taskkill /im %1 /f").arg(fileName));
-        emit sendMsg(tr("正在等待：%1 进程中止...").arg(fileName));
-        if (QFile::exists(fileName)) {
-            QFile::remove(fileName);
-        }
+        emit sendMsg(tr("更新文件：%1 失败，正在重试").arg(fileName));
         file = openFileForWrite(fileName);
-        if(!file)
-            emit sendMsg(tr("更新文件：%1 失败，请检查文件是否占用").arg(fileName));
     }
     // schedule the request
     startRequest(newUrl);
@@ -133,8 +127,10 @@ void Download::httpError(){
 
 std::unique_ptr<QFile> Download::openFileForWrite(const QString &fileName)
 {
+
     std::unique_ptr<QFile> file(new QFile(fileName));
     if (!file->open(QIODevice::WriteOnly)) {
+        emit sendMsg(tr("错误信息：%1 ").arg(file->errorString()));
         return nullptr;
     }
     return file;
