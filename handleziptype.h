@@ -10,7 +10,8 @@
 #include <QFile>
 #include <QObject>
 //#include <QDialog>
-#include "QtGui/private/qzipreader_p.h" //zip解压
+//#include "QtGui/private/qzipreader_p.h" //zip解压
+#include <./quazip/JlCompress.h>    //zip解压
 //#include "QtGui/private/qzipwriter_p.h" //zip压缩
 #include <QEventLoop>
 #include <QFileInfoList>

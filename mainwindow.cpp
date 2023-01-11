@@ -13,11 +13,11 @@ MainWindow::MainWindow(QWidget *parent)
     QSettings *settings;
     settings = new QSettings("update/setting.ini",QSettings::IniFormat);
     QString upgradeRemoteUrl = settings->value("upgrade/url").toString();
+    ui->chkUpgradeBtn->setVisible(false);   //隐藏不必要的检测更新btn
     if(upgradeRemoteUrl.isEmpty()){
         this->upgradeBtnReset(2);
         this->appendProgressMsg(tr("获取配置信息出错，请检查应用程序是否正确...[错误代码:403]"));
         this->appendProgressMsg(tr("程序将在%1秒后退出。").arg(5));
-        QThread::sleep(5);
         QTimer::singleShot(5000,qApp,SLOT(quit()));
         return;
     }
@@ -94,7 +94,9 @@ void MainWindow::on_nowUpgradeBtn_clicked()
      }
      //启动主程序
     if(updateOK){
-        this->startMainApp();
+        this->appendProgressMsg(tr("即将关闭更新程序，正在启动主程序..."));
+        QTimer::singleShot(1500,this,&MainWindow::startMainApp);
+        //this->startMainApp();
     }
 }
 /**
@@ -164,11 +166,8 @@ void MainWindow::syncVersion()
  * @brief MainWindow::startMainApp
  */
 void MainWindow::startMainApp(){
-    this->appendProgressMsg(tr("即将关闭，正在启动主程序..."));
     QString mainAppName = GlobalVal::mainAppName;
     qApp->quit();
-//    QProcess *p = new QProcess();
-//    p->kill();
     if(!mainAppName.isEmpty()){
         QProcess::startDetached(mainAppName,QStringList());
     }

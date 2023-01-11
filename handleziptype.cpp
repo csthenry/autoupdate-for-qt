@@ -206,9 +206,11 @@ bool HandleZipType::unzip(QString zipurl){
     if(!tmpDir.exists()){
         tmpDir.mkpath(unzipUDir);
     }
-    QZipReader read(zipurl);
-    bool rs = read.extractAll(unzipUDir);
-    return rs;
+//    QZipReader read(zipurl);
+//    bool rs = read.extractAll(unzipUDir);
+
+    QStringList res = JlCompress::extractDir(zipurl, unzipUDir);  //解压zip
+    return !res.isEmpty();
 }
 /**
  * 复制文件夹里面的文件

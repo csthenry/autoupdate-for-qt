@@ -14,7 +14,7 @@ CheckVersion::CheckVersion(QObject *parent,QString remoteUrl)
  */
 void CheckVersion::requestRemoteVersion(){
     QUrl url(this->remoteInfoUrl);
-    emit sendMsg(tr("请求中..."));
+    emit sendMsg(tr("数据请求中..."));
     QNetworkRequest req;
     QNetworkAccessManager nam;
     connect(&nam,&QNetworkAccessManager::finished,this,&CheckVersion::requestRemoteVersionFinished);
