@@ -17,7 +17,7 @@ HandleZipType::~HandleZipType(){
 void HandleZipType::downloadZip(QUrl newUrl)
 {
     if (!newUrl.isValid()) {
-        emit sendMsg(tr("下载地址[%1]校验失败").arg(newUrl.toString()));
+        emit sendMsg(tr("下载地址[%1]校验失败...").arg(newUrl.toString()));
         return;
     }
 

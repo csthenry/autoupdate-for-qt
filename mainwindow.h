@@ -50,5 +50,6 @@ private:
     HandleZipType *handleZip;
     void syncVersion();
     void startMainApp();
+    void deleteDir(const QString& path);
 };
 #endif // MAINWINDOW_H

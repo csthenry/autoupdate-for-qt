@@ -35,6 +35,7 @@ int main(int argc, char *argv[])
        QTextCodec *codec = QTextCodec::codecForName("UTF-8");
        QTextCodec::setCodecForLocale(codec);
    #endif
+    /*
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
     for (const QString &locale : uiLanguages) {
@@ -44,6 +45,7 @@ int main(int argc, char *argv[])
             break;
         }
     }
+    */
     MainWindow w;
     //固定大小
     w.setFixedSize(w.width(),w.height());

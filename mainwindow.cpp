@@ -10,13 +10,18 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    //样式修改
+    setWindowFlags(Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint);
+    //setAttribute(Qt::WA_TranslucentBackground);
+
     QSettings *settings;
-    settings = new QSettings("setting.ini",QSettings::IniFormat);
+    settings = new QSettings(QDir::currentPath() + "/update/setting.ini",QSettings::IniFormat);
     QString upgradeRemoteUrl = settings->value("upgrade/url").toString();
     ui->chkUpgradeBtn->setVisible(false);   //隐藏不必要的检测更新btn
     if(upgradeRemoteUrl.isEmpty()){
         this->upgradeBtnReset(2);
-        this->appendProgressMsg(tr("获取配置信息出错，请检查应用程序是否正确...[错误代码:403]"));
+        this->appendProgressMsg(tr("获取配置信息出错，请检查配置文件..."));
         this->appendProgressMsg(tr("程序将在%1秒后退出...").arg(5));
         QTimer::singleShot(5000,qApp,SLOT(quit()));
         return;
@@ -38,7 +43,8 @@ MainWindow::MainWindow(QWidget *parent)
     #endif*/
 
     QDir programRootDir = QDir::currentPath();
-    programRootDir.cdUp(); //更新程序根目录的上级目录
+    //programRootDir.cdUp(); //更新程序根目录的上级目录
+    deleteDir(QDir::currentPath() + "/update/");    //删除旧版本更新器文件
     GlobalVal::programRootDir = programRootDir.path();    //此处定义主程序根目录
     this->on_chkUpgradeBtn_clicked();
 }
@@ -93,7 +99,7 @@ void MainWindow::on_nowUpgradeBtn_clicked()
             updateOK = true;
          }
      }else{
-         this->appendProgressMsg(tr("参数校验失败[错误代码:500]"));
+         this->appendProgressMsg(tr("[错误代码:500]参数校验失败..."));
      }
      //启动主程序
     if(updateOK){
@@ -108,7 +114,7 @@ void MainWindow::on_nowUpgradeBtn_clicked()
  * @param msg
  */
 void MainWindow::appendProgressMsg(QString msg){
-    QString currDateTime =  QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    QString currDateTime =  QDateTime::currentDateTime().toString("hh:mm:ss");
     this->ui->progressMsgBox->append("["+currDateTime+"] " + msg);
 }
 /**
@@ -117,7 +123,7 @@ void MainWindow::appendProgressMsg(QString msg){
  * @param msg
  */
 void MainWindow::receiveMsgDate(QString msg){
-    QString currDateTime =  QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    QString currDateTime =  QDateTime::currentDateTime().toString("hh:mm:ss");
     this->ui->progressMsgBox->append("["+currDateTime+"] "+msg);
 }
 /**
@@ -173,6 +179,19 @@ void MainWindow::startMainApp(){
     qApp->quit();
     if(!mainAppName.isEmpty()){
         QProcess::startDetached(GlobalVal::programRootDir+"/"+mainAppName,QStringList(),GlobalVal::programRootDir);
+    }
+}
+
+void MainWindow::deleteDir(const QString &path)
+{
+    QDir tmpDir(path);
+    foreach(QFileInfo fileInfo, tmpDir.entryInfoList(QDir::Files))
+        if(fileInfo.fileName() != "version.dat" && fileInfo.fileName() != "setting.ini")
+            tmpDir.remove(fileInfo.fileName());
+    foreach(QString subDir, tmpDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot))
+    {
+        deleteDir(path + QDir::separator() + subDir); //递归删除子目录文件
+        tmpDir.rmdir(subDir);    //删除文件夹
     }
 }
 
