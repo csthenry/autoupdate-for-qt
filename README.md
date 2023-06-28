@@ -26,7 +26,7 @@ AutoUpdate是基于QT的通用桌面程序自动升级更新解决方案。
             ]
         },
         {
-        	"path": "dir",
+            "path": "dir",
             "sublist": [
                 "http://192.168.1.1/autoupdate/dist/dir/xxx1.dll",
                 "http://192.168.1.1/autoupdate/dist/dir/xxx2.dll"
@@ -39,12 +39,12 @@ AutoUpdate是基于QT的通用桌面程序自动升级更新解决方案。
 
 其中：
 
-* version为纯数字版本号（这是升级判断的依据）；
+* version为数字版本号（用于版本识别）；
 * versionStr为显示的版本号；
-* type为更新模式，1表示更新指定文件（即是filelist字段内容，此时zipurl可为空），2表示压缩包方式更新,压缩包为zip压缩（此时filelist可为[]）；
+* type为更新模式，1表示更新指定文件（即是filelist字段内容，此时zipurl可为空），2表示压缩包方式更新，压缩包为zip压缩（此时filelist可为[]）；
 * mainAppName是主程序名称，更新完毕后会自动启动主程序；
 * zipurl压缩包地址，type为2时候有效，必须为zip格式压缩；
-* filelist 是指定文件更新方式，其中path为空或/ 表示主目录，有具体目录名称表示子目录(子目录前请后勿加/)
+* filelist 是指定文件更新方式，其中path为空或/ 表示主目录，有具体目录名称表示子目录(子目录勿加/)
 
 压缩包内容示例(dist是待压缩的目录)：
 ```
@@ -85,4 +85,3 @@ url=http://192.168.1.1/autoupdate/auto_update.json
 2. 在Build directory目录下的dist目录中会生成autoUpgrader.exe可执行文件；
 3. 打开QT命令行(开始菜单里面/QT下)，进入dist目录；
 4. 执行：windeployqt autoUpgrader.exe
-5. 将系统盘windows/system32/下的msvcp140_1.dll和vcruntime140_1.dll复制到dist目录。
