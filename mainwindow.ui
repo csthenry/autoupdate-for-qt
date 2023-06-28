@@ -143,6 +143,12 @@
           <pointsize>10</pointsize>
          </font>
         </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="lineWidth">
+         <number>0</number>
+        </property>
         <property name="readOnly">
          <bool>true</bool>
         </property>

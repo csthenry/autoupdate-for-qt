@@ -15,6 +15,8 @@
 #include <QJsonValue>
 #include <QProcess>
 #include <QSettings>
+#include <QStyleOption>
+#include <QPainter>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -42,7 +44,8 @@ private slots:
     void receiveMsgDate(QString msg);
     void receiveMsgDateln(QString msg);
     void upgradeBtnReset(int status);
-
+protected:
+    void paintEvent(QPaintEvent *event) override;
 private:
     Ui::MainWindow *ui;
     Download *download;

@@ -234,6 +234,8 @@ bool HandleZipType::cpdir(QString fromDirPath,QString toDirPath,bool f){
         if(fileInfo.fileName() == "." || fileInfo.fileName() == ".."){
             continue;
         }
+        if(fileInfo.fileName() == "updater.exe")
+            continue;   //跳过更新器
         //复制目录
         if(fileInfo.isDir()){
             QString toDirPath =  toDir.filePath(fileInfo.fileName());

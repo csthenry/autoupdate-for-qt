@@ -58,13 +58,13 @@ DESTDIR = ./dist
 # QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
 
 #版本信息
-VERSION = 1.0.1
+VERSION = 1.0.0
 
 #产品名称
-QMAKE_TARGET_PRODUCT = "Automatic upgrade helper"
+QMAKE_TARGET_PRODUCT = "Client Automatic Upgrade Tool"
 
 #文件说明
-QMAKE_TARGET_DESCRIPTION = "QT Client Program Automatic Upgrade Tool"
+QMAKE_TARGET_DESCRIPTION = "Client Automatic Upgrade Tool"
 
 #版权信息
 QMAKE_TARGET_COPYRIGHT = "Copyright (c) 2023 henry bytecho.net"

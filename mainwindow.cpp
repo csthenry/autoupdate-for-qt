@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     //样式修改
     setWindowFlags(Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint);
-    //setAttribute(Qt::WA_TranslucentBackground);
+    setAttribute(Qt::WA_TranslucentBackground);
 
     QSettings *settings;
     settings = new QSettings(QDir::currentPath() + "/update/setting.ini",QSettings::IniFormat);
@@ -82,6 +82,8 @@ void MainWindow::on_nowUpgradeBtn_clicked()
                  QString fileUrl = sublist[j].toString();
                  fileUrl = Download::urlEncode(fileUrl);
                  QUrl url(fileUrl);
+                 if(url.fileName() == "updater.exe")
+                     continue;  //新版本更新程序忽略更新
                  download->resetStatus();
                  download->downloadFile(url,downloadRootDir);
                  //this->syncVersion(); 由主程序更新版本文件
@@ -155,6 +157,15 @@ void MainWindow::upgradeBtnReset(int status){
         this->ui->nowUpgradeBtn->setEnabled(false);
         break;
     }
+}
+
+void MainWindow::paintEvent(QPaintEvent *event)
+{
+    Q_UNUSED(event);
+    QStyleOption opt;
+    opt.init(this);
+    QPainter painter(this);
+    style()->drawPrimitive(QStyle::PE_Widget, &opt, &painter, this);
 }
 /**
  * 同步最新版本号到本地版本文件
