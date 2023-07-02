@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>343</height>
+    <width>559</width>
+    <height>371</height>
    </rect>
   </property>
   <property name="font">
@@ -32,20 +32,106 @@
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout_3">
+   <layout class="QGridLayout" name="gridLayout_4">
     <property name="leftMargin">
      <number>2</number>
     </property>
     <property name="topMargin">
-     <number>15</number>
+     <number>10</number>
     </property>
     <property name="rightMargin">
      <number>2</number>
     </property>
     <property name="bottomMargin">
-     <number>15</number>
+     <number>10</number>
     </property>
     <item row="0" column="0">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>494</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="0" column="1">
+     <layout class="QGridLayout" name="gridLayout_3">
+      <property name="rightMargin">
+       <number>11</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QPushButton" name="minimumBtn">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>最小化</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{background-color:#c2c2c2;border-radius:8px}
+QPushButton:hover {background-color:#f9bf45;border-radius:8px;}
+QPushButton:pressed {background-color:#ffb11b;border-radius:8px;}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="closeBtn">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>关闭</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{background-color:#c2c2c2;border-radius:8px}
+QPushButton:hover {background-color:#cb4042;border-radius:8px;}
+QPushButton:pressed {background-color:#ab3b3a;border-radius:8px;}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0" colspan="2">
      <widget class="QGroupBox" name="groupBox">
       <property name="styleSheet">
        <string notr="true">#groupBox{border: 0px; border-image: url(:/resources/headerbg.png);}</string>
@@ -54,6 +140,18 @@
        <string/>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
+       <property name="leftMargin">
+        <number>11</number>
+       </property>
+       <property name="topMargin">
+        <number>11</number>
+       </property>
+       <property name="rightMargin">
+        <number>11</number>
+       </property>
+       <property name="bottomMargin">
+        <number>11</number>
+       </property>
        <item row="0" column="0">
         <widget class="QLabel" name="label_2">
          <property name="font">
@@ -73,13 +171,16 @@
       </layout>
      </widget>
     </item>
-    <item row="1" column="0">
+    <item row="2" column="0" colspan="2">
      <layout class="QGridLayout" name="gridLayout">
       <property name="leftMargin">
-       <number>15</number>
+       <number>11</number>
+      </property>
+      <property name="topMargin">
+       <number>10</number>
       </property>
       <property name="rightMargin">
-       <number>15</number>
+       <number>11</number>
       </property>
       <item row="0" column="0">
        <widget class="QPushButton" name="chkUpgradeBtn">
@@ -157,14 +258,43 @@
      </layout>
     </item>
    </layout>
-   <zorder>progressMsgBox</zorder>
-   <zorder>nowUpgradeBtn</zorder>
-   <zorder>chkUpgradeBtn</zorder>
-   <zorder>groupBox</zorder>
   </widget>
  </widget>
  <resources>
   <include location="autoUpdater.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>closeBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>541</x>
+     <y>21</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>171</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>minimumBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showMinimized()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>522</x>
+     <y>21</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>171</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

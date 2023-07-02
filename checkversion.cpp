@@ -68,7 +68,7 @@ void CheckVersion::requestRemoteVersionFinished(QNetworkReply *reply){
  */
 int CheckVersion::readSysVersion()
 {
-    QString configFilePath = QDir::currentPath()+"/version.dat";
+    QString configFilePath = QDir::currentPath()+"/update/version.dat";
     configFilePath = QDir::toNativeSeparators(configFilePath);
     QFile writeFile(configFilePath);
     writeFile.open(QIODevice::ReadOnly);
