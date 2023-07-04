@@ -17,6 +17,7 @@
 #include <QSettings>
 #include <QStyleOption>
 #include <QPainter>
+#include <QGraphicsDropShadowEffect>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -46,11 +47,14 @@ private slots:
     void upgradeBtnReset(int status);
 protected:
     void paintEvent(QPaintEvent *event) override;
+    void mousePressEvent(QMouseEvent *e) override;
+    void mouseMoveEvent(QMouseEvent *e) override;
 private:
     Ui::MainWindow *ui;
     Download *download;
     CheckVersion *cv;
     HandleZipType *handleZip;
+    QPoint clickPos;
     void syncVersion();
     void startMainApp();
     void deleteDir(const QString& path);

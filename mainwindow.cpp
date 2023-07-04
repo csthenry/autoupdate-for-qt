@@ -14,6 +14,14 @@ MainWindow::MainWindow(QWidget *parent)
     //样式修改
     setWindowFlags(Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
+    //内层窗口添加对应的阴影效果
+    QGraphicsDropShadowEffect *shadow_effect = new QGraphicsDropShadowEffect(this);
+    shadow_effect->setOffset(0, 0);
+    shadow_effect->setColor(QColor(150,150,150));
+    shadow_effect->setBlurRadius(20);
+    ui->inner_widget->setGraphicsEffect(shadow_effect);
+    //设置内层QWidget的边框和背景颜色
+    ui->inner_widget->setStyleSheet("QWidget#inner_widget{border:1px solid #FFFFFF;border-radius:7px;background-color:#FFFFFF;}");
 
     QSettings *settings;
     settings = new QSettings(QDir::currentPath() + "/update/setting.ini",QSettings::IniFormat);
@@ -47,6 +55,24 @@ MainWindow::MainWindow(QWidget *parent)
     deleteDir(QDir::currentPath() + "/update/");    //删除旧版本更新器文件
     GlobalVal::programRootDir = programRootDir.path();    //此处定义主程序根目录
     this->on_chkUpgradeBtn_clicked();
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *e)
+{
+    if(e->button() == Qt::LeftButton)
+        clickPos = e->pos();
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent *e)
+{
+    if(e->buttons() & Qt::LeftButton  //左键点击并且移动
+            && e->pos().x() >= 0
+            && e->pos().y() >= 0
+            && e->pos().x() <= geometry().width()
+            && e->pos().y() <= geometry().height() / 6) //范围在窗口的上面部分
+    {
+        move(e->pos() + pos() - clickPos);  //移动窗口
+    }
 }
 
 MainWindow::~MainWindow()
