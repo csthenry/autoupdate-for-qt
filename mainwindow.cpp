@@ -26,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent)
     QSettings *settings;
     settings = new QSettings(QDir::currentPath() + "/update/setting.ini",QSettings::IniFormat);
     QString upgradeRemoteUrl = settings->value("upgrade/url").toString();
+    QString appName = settings->value("app/name").toString();   //用于更新界面显示
+    ui->label_main->setText(QString("<html><head/><body><p><span style=\"font-family:Microsoft YaHei; font-weight:Bold; color:#6b6b6b;\">%1更新程序</span></p></body></html>").arg(appName));
     ui->chkUpgradeBtn->setVisible(false);   //隐藏不必要的检测更新btn
     if(upgradeRemoteUrl.isEmpty()){
         this->upgradeBtnReset(2);
@@ -69,7 +71,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent *e)
             && e->pos().x() >= 0
             && e->pos().y() >= 0
             && e->pos().x() <= geometry().width()
-            && e->pos().y() <= geometry().height() / 6) //范围在窗口的上面部分
+            && e->pos().y() <= ui->groupBox->pos().y() + 20) //顶栏范围，20为topMargin
     {
         move(e->pos() + pos() - clickPos);  //移动窗口
     }

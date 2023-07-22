@@ -6,7 +6,7 @@ AutoUpdate是基于QT的通用桌面程序自动升级更新解决方案。
 
 ### 开发工具
  Qt Creator
- 
+
 ### 后端接口配置格式
 后端接口配置为json格式文件，这里保存的文件名为auto_upgrade.json，可自定义。
 
@@ -69,15 +69,15 @@ dist
     writeFile.close();
 ```
 
-* 后端配置地址，位于当前目录的setting.ini文件内的upgrade节点，如：
+* 后端地址配置，位于当前目录的setting.ini文件内的upgrade节点，app节点中name为更新器展示的标题：
 
 ```ini
-
 [upgrade]
 url=http://192.168.1.1/autoupdate/auto_update.json
-
+[app]
+name=WePlanet
 ```
- 
+
 ### 发布
 ##### Windows环境打包
 
